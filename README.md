@@ -65,10 +65,10 @@ Paperclip.interpolates :tenant do |attachment, _style|
 end
 ```
 
-By default tenant will resolve to `Apartment::Tenant.current_tenant` but you can change it - eg. suppose you use databases like tenant_12345 and only want tenant id in file path, then add following line to `config/initializers/apartment.rb`
+By default tenant will resolve to `Apartment::Tenant.current` but you can change it - eg. suppose you use databases like tenant_12345 and only want tenant id in file path, then add following line to `config/initializers/apartment.rb`
 
 ```ruby
-Spree::Image.tenant_proc = -> { Apartment::Tenant.current_tenant.match(/(\d+)/)[1] }
+Spree::Image.tenant_proc = -> { Apartment::Tenant.current.match(/(\d+)/)[1] }
 ```
 
 Bootstrap sample stores:
@@ -88,7 +88,7 @@ This can be done using [Pow][4] or editing your local `/etc/hosts` file.
 Set namespace for cache engine in `development.rb` and/or `production.rb`
 
 ```ruby
-config.cache_store = :memory_store, { namespace: lambda { Apartment::Tenant.current_tenant } }
+config.cache_store = :memory_store, { namespace: lambda { Apartment::Tenant.current } }
 ```
 
 ### Setting Store Preferences
